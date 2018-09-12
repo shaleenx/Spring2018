@@ -46,27 +46,55 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
 	<h1>Quality: About This Data Set</h1>
-        <p>Write a brief summary about the quality of the data set here</a></p>
+        <p>The Data Set was compiled from an F1 Fansite Blog and hence required comprehensive sanity checks.
+        We check this data for Completeness, Coherent and Correctness using Trifacta Wrangler and Pandas Library in Python.
+        The findings are discussed in detail in this page.</a></p>
+
+    <img src="templates/Wrangler_Top100Drivers.png" alt="Wrangler" height=90px width=1050px/>
+    <p align="center">Figure 1: Wrangler Analysis Snapshot of the Data Fields</p>
+    As shown in Figure 1, Wrangler reported the following ranges and data types for the fields in the dataset:
+    <ul>
+        <li>Ranks: 1-100 (integers)</li>
+        <li>Driver Names: Strings</li>
+        <li>#Races: 19-322 (integers)</li>
+        <li>Num_FirstPos: 0-91 (integers)</li>
+        <li>Num_SecondPos: 0-43 (integers)</li>
+        <li>Num_ThirdPos: 0-30 (integers)</li>
+        <li>Podiums: 0-155 (integers)</li>
+        <li>Poles: 0-67 (integers)</li>
+        <li>Fastest: 0-77 (integers)</li>
+        <li>Points: 55.0 - 1896.0 (floating point decimals)</li>
+    </ul>
       </div>
 
-    
       <div class="page-header">
 	<h2>Is the data complete?</h2>
-	<p>If not, what is missing and what concerns does it raise?
-	What is your evidence for this?</p>
+    <p>Yes, the data is complete, as was analyzed with the help of Trifacta Wrangler which reported that the total number of rows is 100 as expected and no blank/missing values.<br/>
+    The dataset contains 100 rows corresponding to Top 100 unique rankings of F1 Drivers with no NAs and missing values. The dataset contains the required attributes required to conduct an analysis of which top F1 drivers have participated in most races: International ranking, driver name and number of races.
+    We can see that there are no red markers in the wrangler snapshot as shown in Figure 1 as a sanity check.
+	</p>
       </div>
       
       <div class="page-header">
 	<h2>Is the data coherent?</h2>
-	<p>Does it make sense relative to itself? Does it match your
-	expectations? Are the distributions sensible? What is your
-	evidence for this?</p>
+    <p>Yes, the data is coherent since all the values in various fields are in the expected range and type.<br/><br/>
+    By importing the data into a pandas dataframe in python, I could verify that for each driver, the sum of Num_FirstPos, Num_SecondPos and Num_ThirdPos is equal to the value in Podiums field, which makes sense.<br/><br/>
+    Note that podiums field indicates the number of times a driver has held either of the top 3 positions.
+    Moreover, I could verify that the number of races is greater than or equal to each of Num_FirstPos, Num_SecondPos, Num_ThirdPos, Poiums, Poles, and Fastest, which again makes semantic sense, establishing coherency.<br/><br/>
+    As a final sanity check, we can see in Figure 1 that there are no red markers in the wrangler snapshot for any of the fields.<br/></br>
+    However, I think that since we already have Num_FirstPos, Num_SecondPos and Num_ThirdPos; the Podiums field is redundant.
+    </p>
       </div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-	<p>What aspects of this data can you verify? How did you do so? What did
-	you find?</p>
+    <p>As verified with the help of Trifacta Wrangler (shown in Figure 1) and discussed in previous section, we can safely establish that all values meet the expected corretness requirements (data type and range) of corresponding fields.<br/><br/>
+    We can verify that the top performers are visible in the dataset like Michael Schumacher and Lewis Hamilton. Establishing comprehensive authenticity of this data would be the elaborate process of finding relevant information for each racer manually from more credible sources.
+    Finally, we see in Figure 1 that there are no red markers in the wrangler snapshot for any of the fields.<br/></br>
+    </p>
+    <p>Accountability:</p>
+    <p>The dataset has been taken from the F1 Fansite Blog which is a popular F1 magazine and holds the popularity rank of 105,041 in the USA as rated by <a href="https://www.alexa.com/siteinfo/f1-fansite.com">Amazon Alexa Traffic Statistics Engine</a>. Since it a relatively small dataset and this happens to be a popular website trusted by lots of F1 fans, we have little reason to doubt it's inaccuracy. However, since a fan magazine cannot be trusted as a reliable source for scientific studies, the credibility can be disputed based on the applications.
+    </p>
       </div>
 
     </div> <!-- /container -->
