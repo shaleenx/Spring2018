@@ -46,27 +46,69 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
 	<h1>Quality: About This Data Set</h1>
-        <p>Write a brief summary about the quality of the data set here</a></p>
+        <p>
+        The data was collected with the help of <a href="http://www.awareframework.com/">Aware Framework</a>. The data primarily contains GPS sensor information over a week (October 09, 2018 to October 16, 2018) along with the timestamps.
+        The table contains arrival timestamp, departure timestamp, address of the location, lat-long of the location and accuracy.
+        <br>
+        <br>
+        There were numerous issues with the collected data like timestamps being incorrect (too huge to be true or negative), etc.
+        <br>
+        <br>
+        Hence we had to check this data for Completeness, Correctness and Coherency. We perform exploratory analysis using Pandas in Python and some transformations using Trifacta Wrangler. The data was cleaned to make sure that it is reliable to answer the question we pose.
+        </p>
+
+    <!--
+        <img src="templates/Wrangler_Top100Drivers.png" alt="Wrangler" height=90px width=1050px/>
+    <p align="center">Figure 1: Wrangler Analysis Snapshot of the Data Fields</p>
+    As shown in Figure 1, Wrangler reported the following ranges and data types for the fields in the dataset:
+    <ul>
+        <li>Ranks: 1-100 (integers)</li>
+        <li>Driver Names: Strings</li>
+        <li>#Races: 19-322 (integers)</li>
+        <li>Num_FirstPos: 0-91 (integers)</li>
+        <li>Num_SecondPos: 0-43 (integers)</li>
+        <li>Num_ThirdPos: 0-30 (integers)</li>
+        <li>Podiums: 0-155 (integers)</li>
+        <li>Poles: 0-67 (integers)</li>
+        <li>Fastest: 0-77 (integers)</li>
+        <li>Points: 55.0 - 1896.0 (floating point decimals)</li>
+    </ul>
+    -->
       </div>
 
-    
       <div class="page-header">
 	<h2>Is the data complete?</h2>
-	<p>If not, what is missing and what concerns does it raise?
-	What is your evidence for this?</p>
+    <p>
+    Yes, the data is complete as it was analyzed with the help of Pandas which reported that there were 6 groups of addresses after creating groups based on lat-long with accuracy percentage in Pandas. The 6 groups were manually verified to be complete by the subject himself. The 6 groups were Carnegie Mellon University, Craig Street, Morewood Avenue, Howe Street, Negle Avenue, Bellefonte Street.
+    However, the dataset did not contain proper attributes to answer the question.
+    For this, new derived attributes were created using the existing ones. For example, to calculate the duration Shaleen was at a particular location, it was derived by subtracting arrival timestamp from departure timestamp and converting units to minutes.
+    Similarly, since GPS is usually more accurate than required, the latitudes and longitudes were grouped together in bins based on their accuracy of reporting to form groups. These groups represent individual buildings/places Shaleen visited, which is more useful as opposed to individual latitudes and longitudes.
+    With these derived quantities, the dataset was complete enough to make relevant visualizations to answer the question.
+    </p>
       </div>
       
       <div class="page-header">
 	<h2>Is the data coherent?</h2>
-	<p>Does it make sense relative to itself? Does it match your
-	expectations? Are the distributions sensible? What is your
-	evidence for this?</p>
+    <p>
+    After the data's correctness was dealt with, the data was established to be coherent too.
+    Now each attribute was having their values in the expected range and matched well with the dataset in general. Only the attributes which were relevant to the question was kept in the final table view that was used to make the visualizations.
+    There was no redundancy after we removed the attributes which were used once to create a derived quantity like duration of time spent at a particular place.
+    So was verified by importing data in Trifacta Wrangler as well.
+    </p>
       </div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-	<p>What aspects of this data can you verify? How did you do so? What did
-	you find?</p>
+    <p>
+    There were some timestamps which were negative and some that were coming out to be too huge to be true (eg in the order of 10^30).
+    There were 6 rows with such data representing only a very insignificant portion of the entire dataset. Hence, these 6 rows were safely dropped with the help of Trifacta Wrangler to make the data clean and correct.
+    After this step, it was established with the help of Trifacta Wrangler that the dataset was correct. Wrangler was able to identify the data type of each field with no mismatches.
+    We concluded in the end that the dataset was no correct.
+
+    <h2>Accountability:</h2>
+    <p>
+    The dataset was obtained by collecting sensor information from the subject's mobile phone with the help of Aware Framework. The subject could verify that the phone was within a range of 10ft from him for the entire duration of the study and the he could cross-verify the final dataset used for answering the question, it is fair game to establish that the data is accountable. However, there is a scope of error in the data collection by the Aware framework (which is known to be a ell tested framework) and inaccuracies due to misconfigured/broken sensors in the phone. We also assume that the subject is truthful and has enough memory of last week to testify that the data is correct, complete and coherent. As long as the subject, their phone and the aware framework are accountable, the dataset is accountable.
+    </p>
       </div>
 
     </div> <!-- /container -->

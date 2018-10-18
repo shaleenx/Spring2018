@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>Explore Byte Tutorial</title>
+    <title>Byte 4b: Mobile Byte</title>
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,8 +45,9 @@
       
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
-	<h1>Interactive Data Science Project Exploratory Analysis Byte Example</h1>
+	<h1>Byte 4b: Mobile Byte</h1>
         <p>This is the Exploratory Analysis Byte of the Interactive Data Science class.</p>
+        <p>Where did Shaleen spend most of his time last week apart from his home?</p>
       </div>
       
       <div class="page-header">
@@ -54,44 +55,20 @@
       </div> <!-- /page-header -->
     </div> <!-- /container -->
     
-    <div class="button-toolbar" role="toolbar" id="headers" name="headers">
-      {% for column in columns %}
-      <button type="button" class = "btn-space btn btn-info" id="{{column}}" onclick="updateTable('{{column}}')">{{column}}</button>
-      {% endfor %}
-    </div>
-    
-    <!--
-    <div id="animals"><table id="data" class="table table-striped table-hover">
-	<thead class ="thead-inverse">
-	  <tr id="cols">
-	  </tr>
-	</thead>
-	<tbody id="rows"> 
-	</tbody>
-    </table></div>
-  -->
+<!--    <iframe width="1500" height="900" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col1%2C+col9+from+1z6rbsoHNdeUGz-sQOcj8KGgZvoXTQYjro9gGK4Xd+where+col2+%3E%3D+100+and+col2+%3C%3D+323+order+by+col9+desc+limit+100&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3A%22Points%22%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22logScale%22%3Afalse%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22logScale%22%3Afalse%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=true&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%2C+%22title%22%3A%22Drivers%22%7D&amp;gco_legend=right&amp;gco_title=Performance+of+Top+F1+Drivers&amp;gco_focusTarget=category&amp;width=1500&amp;height=900"></iframe>-->
+
+  <div class='tableauPlaceholder' id='viz1539824168306' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LocationData_3&#47;Sheet2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='LocationData_3&#47;Sheet2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LocationData_3&#47;Sheet2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>
   
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead class="thead-inverse">
-       <tr id="cols">
-    {% for item in columns %}
-             <th>{{ item }}</th>
-    {% endfor %}
-         </tr>
-        </thead>
-        <tbody id="rows">
-    {% for row in rows %}
-         <tr>
-      {% for datum in row %}
-                <td>{{ datum }} </td>
-      {% endfor %}
-         </tr>
-    {% endfor %}
-        </tbody>
-     </table>
-  </div>
-  
+  <script type='text/javascript'>
+      var divElement = document.getElementById('viz1539824168306');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  </script>
+
+  <h1>Discussion</h1>
+  <br>
+  <p>As we can see, Shaleen spent most of his time last week at Gates Hillman Center, Carnegie Mellon University.</p>
+  <p>Like a typical CMU SCS student, the only life Shaleen has is shown by the ocassional trips to Chipotle, Subway and Yuva India Restaurant on Craig Street close to CMU Campus.</p>
+  <p>Shaleen also wasted a significant amount of time at bus stops, Bellefont and Negley Ave, totalling up to 51 minutes in the last 1 week.</p>
+  <p>Since the flu season is around the corner, Shaleen also spent a teensy bit of his time getting a flu shot at the CMU Health Services Center at Morewood Avenue.</p>
   
     <!-- Bootstrap core JavaScript
     ================================================== -->
