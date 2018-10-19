@@ -46,13 +46,21 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
 	<h1>Quality: About This Data Set</h1>
-        <p>The Data Set was compiled from an F1 Fansite Blog and hence required comprehensive sanity checks.
-        We check this data for Completeness, Coherent and Correctness using Trifacta Wrangler and Pandas Library in Python.
-        The findings are discussed in detail in this page.</a></p>
+        <p>
+        The data was collected with the help of <a href="http://www.awareframework.com/">Aware Framework</a>. The data primarily contains GPS sensor information over a week (October 09, 2018 to October 16, 2018) along with the timestamps.
+        The table contains arrival timestamp, departure timestamp, address of the location, lat-long of the location and accuracy.
+        <br>
+        <br>
+        There were numerous issues with the collected data like timestamps being incorrect (too huge to be true or negative), etc.
+        <br>
+        <br>
+        Hence we had to check this data for Completeness, Correctness and Coherency. We perform exploratory analysis using Pandas in Python and some transformations using Trifacta Wrangler. The data was cleaned to make sure that it is reliable to answer the question we pose.
+        </p>
 
-    <img src="templates/Wrangler_Top100Drivers.png" alt="Wrangler" height=90px width=1050px/>
-    <p align="center">Figure 2: Wrangler Analysis Snapshot of the Data Fields</p>
-    As shown in Figure 2, Wrangler reported the following ranges and data types for the fields in the dataset:
+    <!--
+        <img src="templates/Wrangler_Top100Drivers.png" alt="Wrangler" height=90px width=1050px/>
+    <p align="center">Figure 1: Wrangler Analysis Snapshot of the Data Fields</p>
+    As shown in Figure 1, Wrangler reported the following ranges and data types for the fields in the dataset:
     <ul>
         <li>Ranks: 1-100 (integers)</li>
         <li>Driver Names: Strings</li>
@@ -65,36 +73,41 @@
         <li>Fastest: 0-77 (integers)</li>
         <li>Points: 55.0 - 1896.0 (floating point decimals)</li>
     </ul>
+    -->
       </div>
 
       <div class="page-header">
 	<h2>Is the data complete?</h2>
-    <p>Yes, the data is complete, as was analyzed with the help of Trifacta Wrangler which reported that the total number of rows is 100 as expected and no blank/missing values.<br/>
-    The dataset contains 100 rows corresponding to Top 100 unique rankings of F1 Drivers with no NAs and missing values. The dataset contains the required attributes required to conduct an analysis of which top F1 drivers have participated in most races: International ranking, driver name and number of races.
-    We can see that there are no red markers in the wrangler snapshot as shown in Figure 2 as a sanity check.
-	</p>
+    <p>
+    Yes, the data is complete as it was analyzed with the help of Pandas which reported that there were 6 groups of addresses after creating groups based on lat-long with accuracy percentage in Pandas. The 6 groups were manually verified to be complete by the subject himself. The 6 groups were Carnegie Mellon University, Craig Street, Morewood Avenue, Howe Street, Negle Avenue, Bellefonte Street.
+    However, the dataset did not contain proper attributes to answer the question.
+    For this, new derived attributes were created using the existing ones. For example, to calculate the duration Shaleen was at a particular location, it was derived by subtracting arrival timestamp from departure timestamp and converting units to minutes.
+    Similarly, since GPS is usually more accurate than required, the latitudes and longitudes were grouped together in bins based on their accuracy of reporting to form groups. These groups represent individual buildings/places Shaleen visited, which is more useful as opposed to individual latitudes and longitudes.
+    With these derived quantities, the dataset was complete enough to make relevant visualizations to answer the question.
+    </p>
       </div>
       
       <div class="page-header">
 	<h2>Is the data coherent?</h2>
-    <p>Yes, the data is coherent since all the values in various fields are in the expected range and type.<br/><br/>
-    We observe from Figure 1.1, the frequency distribution of races resembles a shifted normal distribution, indicating that our dataset contains a fair share of central values and a small number of extreme values.
-    By importing the data into a pandas dataframe in python, I could verify that for each driver, the sum of Num_FirstPos, Num_SecondPos and Num_ThirdPos is equal to the value in Podiums field, which makes sense.<br/><br/>
-    Note that podiums field indicates the number of times a driver has held either of the top 3 positions.
-    Moreover, I could verify that the number of races is greater than or equal to each of Num_FirstPos, Num_SecondPos, Num_ThirdPos, Poiums, Poles, and Fastest, which again makes semantic sense, establishing coherency.<br/><br/>
-    As a final sanity check, we can see in Figure 2 that there are no red markers in the wrangler snapshot for any of the fields.<br/></br>
-    However, I think that since we already have Num_FirstPos, Num_SecondPos and Num_ThirdPos; the Podiums field is redundant.
+    <p>
+    After the data's correctness was dealt with, the data was established to be coherent too.
+    Now each attribute was having their values in the expected range and matched well with the dataset in general. Only the attributes which were relevant to the question was kept in the final table view that was used to make the visualizations.
+    There was no redundancy after we removed the attributes which were used once to create a derived quantity like duration of time spent at a particular place.
+    So was verified by importing data in Trifacta Wrangler as well.
     </p>
       </div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-    <p>As verified with the help of Trifacta Wrangler (shown in Figure 2) and discussed in previous section, we can safely establish that all values meet the expected corretness requirements (data type and range) of corresponding fields.<br/><br/>
-    We can verify that the top performers are visible in the dataset like Michael Schumacher and Lewis Hamilton. Establishing comprehensive authenticity of this data would be the elaborate process of finding relevant information for each racer manually from more credible sources.
-    Finally, we see in Figure 2 that there are no red markers in the wrangler snapshot for any of the fields.<br/></br>
-    </p>
-    <p>Accountability:</p>
-    <p>The dataset has been taken from the F1 Fansite Blog which is a popular F1 magazine and holds the popularity rank of 105,041 in the USA as rated by <a href="https://www.alexa.com/siteinfo/f1-fansite.com">Amazon Alexa Traffic Statistics Engine</a>. Since it a relatively small dataset and this happens to be a popular website trusted by lots of F1 fans, we have little reason to doubt it's inaccuracy. However, since a fan magazine cannot be trusted as a reliable source for scientific studies, the credibility can be disputed based on the applications.
+    <p>
+    There were some timestamps which were negative and some that were coming out to be too huge to be true (eg in the order of 10^30).
+    There were 6 rows with such data representing only a very insignificant portion of the entire dataset. Hence, these 6 rows were safely dropped with the help of Trifacta Wrangler to make the data clean and correct.
+    After this step, it was established with the help of Trifacta Wrangler that the dataset was correct. Wrangler was able to identify the data type of each field with no mismatches.
+    We concluded in the end that the dataset was no correct.
+
+    <h2>Accountability:</h2>
+    <p>
+    The dataset was obtained by collecting sensor information from the subject's mobile phone with the help of Aware Framework. The subject could verify that the phone was within a range of 10ft from him for the entire duration of the study and the he could cross-verify the final dataset used for answering the question, it is fair game to establish that the data is accountable. However, there is a scope of error in the data collection by the Aware framework (which is known to be a ell tested framework) and inaccuracies due to misconfigured/broken sensors in the phone. We also assume that the subject is truthful and has enough memory of last week to testify that the data is correct, complete and coherent. As long as the subject, their phone and the aware framework are accountable, the dataset is accountable.
     </p>
       </div>
 
@@ -102,7 +115,7 @@
 
 
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+    -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-1.11.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
